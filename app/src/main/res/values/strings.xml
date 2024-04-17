@@ -3,4 +3,15 @@
     <string name="navigation_item_main">Main</string>
     <string name="navigation_item_favorite">Favorite</string>
     <string name="navigation_item_profile">Profile</string>
+    <string name="dessert_description">\"Intro logo\"</string>
+    <string name="introduction_unveil">Unveil a World</string>
+    <string name="introduction_toys_accessories_foods">Toys &amp; Accessories &amp; Foods</string>
+    <string name="introduction_for_your_pet">for your Pet</string>
+
+    <string name="SplashDescription">Browse latest styles from Top Brands \nGet personalized recommendations \nEnjoy fast and free Shipping</string>
+
+    <string name="SplashButtonText">Lets Get Started</string>
+
+
+
 </resources>
