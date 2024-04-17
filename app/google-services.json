@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "556867347484",
+    "project_id": "desertcart-3eee7",
+    "storage_bucket": "desertcart-3eee7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556867347484:android:71c217683df17599472bd9",
+        "android_client_info": {
+          "package_name": "com.example.vknews"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnTsrtVYxBRRn_i_ajFkomsliQBSlqamk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,4 +1,4 @@
-package dev.mkao.habarikimataifa
+package dev.mkao.costkart
 
 import org.junit.Test
 
