@@ -32,15 +32,21 @@ import dev.mkao.costkart.componets.SpacerHeight
 
 @Composable
 fun SplashScreen() {
+    val footerText = buildAnnotatedString {
+        append(stringResource(R.string.SplashFooter))
+        withStyle(style = SpanStyle(color = Color(0xFF008b86))) {
+            append(" " + stringResource(R.string.SplashAddon))
+        }
+    }
     val introText = buildAnnotatedString {
         withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)) {
             append(stringResource(id = R.string.introduction_unveil))
         }
         withStyle(style = SpanStyle(color = Color(0xFF008b86), fontWeight = FontWeight.Bold)) {
-            append(", " + stringResource(id = R.string.introduction_for_your_pet))
+            append("\n" + stringResource(id = R.string.introduction_toys_accessories_foods))
         }
         withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)) {
-            append(" " + stringResource(id = R.string.introduction_toys_accessories_foods))
+            append("\n" + stringResource(id = R.string.introduction_for_your_pet))
         }
     }
 
@@ -55,29 +61,21 @@ fun SplashScreen() {
             Image(
                 painter = painterResource(id = R.drawable.intro_logo),
                 contentDescription = stringResource(id = R.string.dessert_description)
-            )
+                 )
         }
-        SpacerHeight(16.dp)
+        SpacerHeight(5.dp)
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(
-                text = stringResource(R.string.introduction_unveil),
-                style = TextStyle(
-                    color = Color.Black,
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
-            SpacerHeight(10.dp)
+            SpacerHeight(5.dp)
             Text(
                 text = introText,
                 style = TextStyle(
                     textAlign = TextAlign.Center,
                     color = Color.LightGray,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Normal
                 )
             )
-            SpacerHeight(10.dp)
+            SpacerHeight(5.dp)
             Text(
                 text = stringResource(R.string.SplashDescription),
                 style = TextStyle(
@@ -88,11 +86,11 @@ fun SplashScreen() {
                 )
             )
         }
-        SpacerHeight(10.dp)
+        SpacerHeight(5.dp)
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 5.dp)
                 .fillMaxWidth()
                 .height(60.dp),
             shape = RoundedCornerShape(15.dp),
@@ -100,6 +98,19 @@ fun SplashScreen() {
         ) {
             Text(text = stringResource(id = R.string.SplashButtonText), fontSize = 18.sp)
         }
+
+        SpacerHeight(5.dp)
+        Text(
+            text = buildAnnotatedString {
+                append(footerText)
+            },
+            style = TextStyle(
+                color = Color.Black,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center
+            )
+        )
     }
 }
 
