@@ -11,7 +11,9 @@
     <string name="SplashDescription">Browse latest styles from Top Brands \nGet personalized recommendations \nEnjoy fast and free Shipping</string>
 
     <string name="SplashButtonText">Lets Get Started</string>
-
+    <string name="Home_Welcome">Welcome</string>
+    <string name="Bold_Desc_Home">Tom Johnson</string>
+    <string name="bellIcon">Notifications</string>
 
 
 </resources>
