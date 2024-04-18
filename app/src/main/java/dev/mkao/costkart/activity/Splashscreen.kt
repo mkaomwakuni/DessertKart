@@ -4,8 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,52 +18,42 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import dev.mkao.costkart.R
 import dev.mkao.costkart.componets.SpacerHeight
-import dev.mkao.costkart.componets.SpacerWidth
 
 @Composable
-fun Splashscreen() {
-
-    val introText = with(AnnotatedString.Builder()) {
-        pushStyle(
-            style = SpanStyle(
-                color = Color.Black,
-                fontWeight = FontWeight.Bold
-            )
-        )
-        append(stringResource(id = R.string.introduction_unveil))
-        pushStyle(
-            style = SpanStyle(
-                color = Color(0xFF008b86),
-                fontWeight = FontWeight.Bold
-            )
-        )
-        append(", " + stringResource(id = R.string.introduction_for_your_pet))
-
-        pushStyle(
-            style = SpanStyle(
-                color = Color.Black,
-                fontWeight = FontWeight.Bold
-            )
-        )
-        append(" " + stringResource(id = R.string.introduction_toys_accessories_foods))
-
-        toAnnotatedString()
+fun SplashScreen() {
+    val footerText = buildAnnotatedString {
+        append(stringResource(R.string.SplashFooter))
+        withStyle(style = SpanStyle(color = Color(0xFF008b86))) {
+            append(" " + stringResource(R.string.SplashAddon))
+        }
+    }
+    val introText = buildAnnotatedString {
+        withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)) {
+            append(stringResource(id = R.string.introduction_unveil))
+        }
+        withStyle(style = SpanStyle(color = Color(0xFF008b86), fontWeight = FontWeight.Bold)) {
+            append("\n" + stringResource(id = R.string.introduction_toys_accessories_foods))
+        }
+        withStyle(style = SpanStyle(color = Color.Black, fontWeight = FontWeight.Bold)) {
+            append("\n" + stringResource(id = R.string.introduction_for_your_pet))
+        }
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(start = 10.dp, end = 10.dp, bottom = 5.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -73,49 +61,24 @@ fun Splashscreen() {
             Image(
                 painter = painterResource(id = R.drawable.intro_logo),
                 contentDescription = stringResource(id = R.string.dessert_description)
-            )
+                 )
         }
-        SpacerHeight(16.dp)
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Text(
-                text = stringResource(R.string.introduction_unveil), style = TextStyle(
-                    color = Color.Black,
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold
-                )
-            )
+        SpacerHeight(5.dp)
+        Column(horizontalAlignment = Alignment.CenterHorizontally) {
             SpacerHeight(5.dp)
             Text(
-                text = AnnotatedString.Builder().apply {
-                    pushStyle(
-                        style = SpanStyle(
-                            color = Color(0xFF008b86),
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                    append(stringResource(R.string.introduction_toys_accessories_foods))
-                    pushStyle(
-                        style = SpanStyle(
-                            color = Color.Black,
-                            fontSize = 24.sp,
-                            fontWeight = FontWeight.Bold
-                        )
-                    )
-                    append("\n" + stringResource(R.string.introduction_for_your_pet))
-                }.toAnnotatedString(),
+                text = introText,
                 style = TextStyle(
                     textAlign = TextAlign.Center,
                     color = Color.LightGray,
                     fontSize = 24.sp,
-                    fontWeight = FontWeight.Bold
+                    fontWeight = FontWeight.Normal
                 )
             )
             SpacerHeight(5.dp)
             Text(
-                text = stringResource(R.string.SplashDescription), style = TextStyle(
+                text = stringResource(R.string.SplashDescription),
+                style = TextStyle(
                     color = Color.DarkGray,
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Normal,
@@ -127,20 +90,32 @@ fun Splashscreen() {
         Button(
             onClick = { /*TODO*/ },
             modifier = Modifier
-                .padding(top = 16.dp)
+                .padding(top = 5.dp)
                 .fillMaxWidth()
                 .height(60.dp),
-            shape = RoundedCornerShape(10.dp),
+            shape = RoundedCornerShape(15.dp),
             colors = ButtonDefaults.buttonColors(Color(0xFF008b86))
         ) {
-            Text(text = stringResource(id = R.string.SplashButtonText))
+            Text(text = stringResource(id = R.string.SplashButtonText), fontSize = 18.sp)
         }
-    }
 
+        SpacerHeight(5.dp)
+        Text(
+            text = buildAnnotatedString {
+                append(footerText)
+            },
+            style = TextStyle(
+                color = Color.Black,
+                fontSize = 18.sp,
+                fontWeight = FontWeight.Normal,
+                textAlign = TextAlign.Center
+            )
+        )
+    }
 }
 
 @Preview(showSystemUi = true)
 @Composable
-fun PreviewSplash(){
-    Splashscreen()
+fun PreviewSplash() {
+    SplashScreen()
 }
