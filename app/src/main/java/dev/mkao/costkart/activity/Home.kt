@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
@@ -23,6 +24,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
@@ -273,8 +275,8 @@ fun CategoriesPreview() {
 fun ImageFetcher(image: Painter) {
     Image(
         modifier = Modifier
-            .height(160.dp)
-            .width(160.dp)
+            .height(140.dp)
+            .width(140.dp)
             .clip(RoundedCornerShape(5.dp)),
         painter = image,
         contentScale = ContentScale.FillBounds,
@@ -295,10 +297,11 @@ fun CategoriesBox() {
     LazyRow(
         modifier = Modifier
             .fillMaxWidth(),
-        horizontalArrangement = Arrangement.SpaceBetween
-    ) {
+                horizontalArrangement = Arrangement.SpaceBetween) {
         item {
-            Box(modifier = Modifier.width(140.dp)) {
+            Box(modifier = Modifier
+                .width(140.dp)
+                .padding(5.dp)) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -306,21 +309,23 @@ fun CategoriesBox() {
                 ) {
                     Box(
                         modifier = Modifier
-                            .width(140.dp)
-                            .height(160.dp)
+                            .width(120.dp)
+                            .height(120.dp)
                             .padding(5.dp)
                             .clip(RoundedCornerShape(5.dp)),
                         contentAlignment = Alignment.BottomStart
                     ) {
+                        Icon(
+                            imageVector = Icons.Default.FavoriteBorder,
+                            contentDescription = null,
+                            tint = Color.LightGray,
+                            modifier = Modifier
+                                .padding(8.dp)
+                                .size(20.dp)
+                                .align(Alignment.TopStart)
+                        )
                         ImageFetcher(image = painterResource(id = R.drawable.item1))
                     }
-
-                    Text(
-                        modifier = Modifier.padding(5.dp),
-                        text = "Green Wood Apartments",
-                        overflow = TextOverflow.Ellipsis,
-                        style = TextStyle(color = Color.Black)
-                    )
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
@@ -328,7 +333,13 @@ fun CategoriesBox() {
                     ) {
                         Text(
                             textAlign = TextAlign.Start,
-                            text = "London",
+                            text = "$",
+                            style = TextStyle(color = Color.Gray),
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                        Text(
+                            textAlign = TextAlign.Start,
+                            text = " 250",
                             style = TextStyle(color = Color.Gray),
                             modifier = Modifier.padding(start = 8.dp)
                         )
@@ -351,6 +362,21 @@ fun CategoriesBox() {
                                 modifier = Modifier.padding(start = 4.dp)
                             )
                         }
+                    }
+                    SpacerHeight(5.dp)
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(start = 5.dp),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        Text(
+                            text = "Dog Sweater",
+                            textAlign = TextAlign.Start,
+                            fontWeight = FontWeight.Bold,
+                            style = TextStyle(color = Color.Black),
+                            modifier = Modifier.padding(start = 4.dp)
+                        )
                     }
                 }
             }
