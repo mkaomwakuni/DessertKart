@@ -16,6 +16,7 @@
     <string name="bellIcon">Notifications</string>
     <string name="Adverts">Advertisements</string>
     <string name="CategoriesHeadline">Categories</string>
+    <string name="CategoriesTag">Show All</string>
     <string name="SplashFooter">Already have an account?</string>
     <string name="SplashAddon">Sign In</string>
 
