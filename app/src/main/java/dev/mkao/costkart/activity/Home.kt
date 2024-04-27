@@ -153,9 +153,9 @@ fun Home (notifications: Int) {
             }
         }
 
-        SpacerHeight(5.dp)
+        SpacerHeight(2.dp)
         Adverts()
-        SpacerHeight(5.dp)
+        SpacerHeight(2.dp)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -172,9 +172,9 @@ fun Home (notifications: Int) {
                 color = colorResource(R.color.teal)
             )
         }
-        SpacerHeight(5.dp)
+        SpacerHeight(2.dp)
         CategoriesPreview()
-        SpacerHeight(5.dp)
+        SpacerHeight(2.dp)
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -208,7 +208,7 @@ fun CategoriesPreview() {
 
     LazyRow(
         modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalArrangement = Arrangement.spacedBy(15.dp)
     ) {
         item {
             Column(
