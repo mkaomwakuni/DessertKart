@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.pager.HorizontalPager
@@ -24,6 +25,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.SearchBar
@@ -38,6 +40,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -46,6 +50,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -264,6 +270,19 @@ fun CategoriesPreview() {
 }
 
 @Composable
+fun ImageFetcher(image: Painter) {
+    Image(
+        modifier = Modifier
+            .height(160.dp)
+            .width(160.dp)
+            .clip(RoundedCornerShape(5.dp)),
+        painter = image,
+        contentScale = ContentScale.FillBounds,
+        contentDescription = "Image"
+    )
+}
+
+@Composable
 fun CategoriesBox() {
     val categoryItems = listOf(
         R.drawable.cat_1,
@@ -274,55 +293,68 @@ fun CategoriesBox() {
     )
 
     LazyRow(
-        modifier = Modifier.fillMaxWidth(),
-        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween
     ) {
-
         item {
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(colorResource(id = R.color.LightGrey)),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    modifier = Modifier.size(80.dp),
-                    tint = colorResource(id = R.color.teal),
-                    painter = painterResource(id = R.drawable.cat_2), contentDescription = null)
-                Text("Towel", color = colorResource(id = R.color.teal))
+            Box(modifier = Modifier.width(160.dp)) {
+                Column(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .width(160.dp)
+                            .height(160.dp)
+                            .padding(5.dp)
+                            .clip(RoundedCornerShape(5.dp)),
+                        contentAlignment = Alignment.BottomStart
+                    ) {
+                        ImageFetcher(image = painterResource(id = R.drawable.item1))
+                    }
+
+                    Text(
+                        modifier = Modifier.padding(5.dp),
+                        text = "Green Wood Apartments",
+                        overflow = TextOverflow.Ellipsis,
+                        style = TextStyle(color = Color.Black)
+                    )
+
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(
+                            textAlign = TextAlign.Start,
+                            text = "London",
+                            style = TextStyle(color = Color.Gray),
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(horizontal = 10.dp),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            Icon(
+                                imageVector = Icons.Default.Star,
+                                contentDescription = null,
+                                tint = Color.Yellow,
+                                modifier = Modifier.size(20.dp)
+                            )
+                            Text(
+                                text = "4.9",
+                                textAlign = TextAlign.End,
+                                style = TextStyle(color = Color.Black),
+                                modifier = Modifier.padding(start = 4.dp)
+                            )
+                        }
+                    }
+                }
             }
         }
-        item {
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(colorResource(id = R.color.LightGrey)),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    modifier = Modifier.size(80.dp),
-                    tint = colorResource(id = R.color.teal),
-                    painter = painterResource(id = R.drawable.cat_3), contentDescription = null)
-                Text("Wi-Fi", color = colorResource(id = R.color.teal))
-            }
-        }
-        item {
-            Column(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(5.dp))
-                    .background(colorResource(id = R.color.LightGrey)),
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Icon(
-                    modifier = Modifier.size(80.dp),
-                    tint = colorResource(id = R.color.teal),
-                    painter = painterResource(id = R.drawable.cat_2), contentDescription = null)
-                Text("Television", color = colorResource(id = R.color.teal))
-            }
-
-        }
-
-    }
 }
 @Preview
 @Composable
