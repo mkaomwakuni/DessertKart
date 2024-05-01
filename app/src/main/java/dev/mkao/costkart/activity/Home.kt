@@ -190,7 +190,7 @@ fun Home (notifications: Int) {
             )
         }
         SpacerHeight(5.dp)
-        CategoriesPreview()
+        CategoriesBox()
     }
 }
 
@@ -298,7 +298,7 @@ fun CategoriesBox() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         item {
-            Box(modifier = Modifier.width(160.dp)) {
+            Box(modifier = Modifier.width(140.dp)) {
                 Column(
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -306,7 +306,7 @@ fun CategoriesBox() {
                 ) {
                     Box(
                         modifier = Modifier
-                            .width(160.dp)
+                            .width(140.dp)
                             .height(160.dp)
                             .padding(5.dp)
                             .clip(RoundedCornerShape(5.dp)),
@@ -355,6 +355,7 @@ fun CategoriesBox() {
                 }
             }
         }
+    }
 }
 @Preview
 @Composable
