@@ -4,7 +4,7 @@ DessertKart is an e-commerce app specializing in delicious desserts delivered ri
 
 ## Features
 
-🍰 **Extensive Catalog:** Explore a wide range of desserts from cakes to cookies, and more.
+🍰 **Extensive Catalog:** Explore a wide range of Products  and more.
 🛒 **Easy Ordering:** Simple and intuitive interface for placing orders quickly.
 🚚 **Fast Delivery:** Get your desserts delivered fresh and fast.
 🔒 **Secure Payments:** Secure payment options to ensure a safe transaction.
