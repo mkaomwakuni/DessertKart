@@ -15,11 +15,11 @@
     <string name="Bold_Desc_Home">Tom Johnson</string>
     <string name="bellIcon">Notifications</string>
     <string name="Adverts">Advertisements</string>
-    <string name="CategoriesHeadline">Categories</string>
-    <string name="CategoriesTag">Show All</string>
+    <string name="SellerHeadline">Best Seller</string>
+    <string name="CategoriesTag">See All</string>
     <string name="SplashFooter">Already have an account?</string>
     <string name="SplashAddon">Sign In</string>
-
+    <string name="CategoriesHeadline">Categories</string>
 
 
 </resources>
