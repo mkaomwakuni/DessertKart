@@ -381,6 +381,7 @@ fun CategoriesBox() {
                 }
             }
         }
+
     }
 }
 @Preview
