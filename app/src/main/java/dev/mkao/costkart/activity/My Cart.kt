@@ -41,8 +41,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import dev.mkao.costkart.R
 import dev.mkao.costkart.domain.CartItem
 
 @Composable
@@ -256,7 +258,7 @@ fun MyCartItem(
                                     contentDescription = "Minus"
                                 )
                             }
-                            VerticalDivider(
+                            Divider(
                                 color = Color.Black,
                                 modifier = Modifier
                                     .fillMaxHeight()
@@ -293,4 +295,18 @@ fun MyCartItem(
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun PreviewMyCart() {
+    val cartItems = listOf(
+        CartItem(R.drawable.item1, "Item Title 1", "Item Description 1", "$ 50", 1),
+        CartItem(R.drawable.item2, "Item Title 2", "Item Description 2", "$ 50", 1)
+    )
+    MyCart(
+        cartItems = cartItems,
+        onClearCart = {},
+        onCheckout = {},
+        onItemRemove = {},
+        onItemCountChange = { _, _ -> }
+    )
+}
