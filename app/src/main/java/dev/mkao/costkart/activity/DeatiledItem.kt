@@ -1,28 +1,26 @@
 package dev.mkao.costkart.activity
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -34,33 +32,40 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.graphics.PathParser
+import androidx.core.graphics.PathParser.createPathFromPathData
 import dev.mkao.costkart.R
-import dev.mkao.costkart.componets.SpacerHeight
 import dev.mkao.costkart.componets.SpacerWidth
 
+
+@SuppressLint("RestrictedApi")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailedItem() {
-    Column(modifier = Modifier.fillMaxSize()) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color(0xFFF5F5F5))) {
         Box(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(300.dp)
-                .background(Color.Transparent)
         ) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 val pathData =
                     "M0,0 L0,350 Q${size.width / 2},${size.height + 200} ${size.width},350 L${size.width},0 Z"
-                val path = PathParser.createPathFromPathData(pathData).asComposePath()
+                val path = createPathFromPathData(pathData).asComposePath()
                 drawPath(
                     path = path,
                     color = Color(0xFFFFDAB9),
@@ -96,7 +101,7 @@ fun DetailedItem() {
                         onClick = { /* Handle share action */ }
                     ) {
                         Icon(
-                            Icons.Filled.Share,
+                            Icons.Outlined.Favorite,
                             contentDescription = "Share",
                             tint = Color.Black
                         )
@@ -114,7 +119,6 @@ fun DetailedItem() {
                     .align(Alignment.Center)
             ) {
                 Spacer(modifier = Modifier.height(80.dp))
-
                 Image(
                     painter = painterResource(id = R.drawable.item1),
                     contentDescription = "Product Image",
@@ -142,90 +146,115 @@ fun DetailedItem() {
                 )
             }
         }
-        Box(
+
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(1.dp)
+                .padding(10.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp)
         ) {
-
-
-            Row(
+            Card(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(10.dp)
+                    .weight(1f)
+                    .shadow(elevation = 3.dp)
+                    .height(70.dp),
+                colors = CardDefaults.cardColors(Color.White),
+                shape = RoundedCornerShape(5.dp),
             ) {
-                Card(
+                Row(
                     modifier = Modifier
-                        .wrapContentWidth()
-                        .height(IntrinsicSize.Min), // Ensure both cards have the same height
-                    shape = RoundedCornerShape(5.dp),
-
-                    ) {
-                    Row(
+                        .fillMaxSize()
+                        .padding(5.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
                         modifier = Modifier
-                            .wrapContentWidth()
-                            .height(70.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .padding(end = 10.dp)
                     ) {
-                        Column(
-                            modifier = Modifier
-                        ) {
-                            Text(text = "Customer Ratings", fontWeight = FontWeight.Bold)
-                            SpacerHeight(2.dp)
-                            Text(text = "Over 50 reviews")
-                        }
+                        Text(text = "Customer Ratings", fontWeight = FontWeight.Bold)
+                        Spacer(modifier = Modifier.height(2.dp))
+                        Text(text = "Over 50 reviews")
+                    }
+                    SpacerWidth(1.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(120.dp)
+                            .background(Color.Transparent, shape = CircleShape)
+                            .padding(5.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
                         Icon(
                             imageVector = Icons.Filled.Star,
-                            contentDescription = "Half Star",
+                            contentDescription = "Star Icon",
                             tint = Color.Yellow,
                             modifier = Modifier
-                                .size(56.dp)
-                                .scale(1f, 1.9f)
-                        )
+                                .size(120.dp)
+                                .offset(
+                                    x = 10.dp,
+                                    y = 24.dp
+                                )
+                                .scale(4f, 4f)
+                                .clip(RoundedCornerShape(8.dp))
+                                .rotate(-40f)
+                            )
+                        Text(
+                            modifier = Modifier
+                                .padding(top = 25.dp),
+                            text = "4.9",
+                            fontWeight = FontWeight.Bold,
+                            textAlign = TextAlign.End)
                     }
                 }
-                Spacer(modifier = Modifier.width(16.dp))
-                Card(
+
+            }
+            Card(
+                modifier = Modifier
+                    .shadow(elevation = 3.dp)
+                    .weight(1f)
+                    .height(70.dp),
+                colors = CardDefaults.cardColors(Color.White),
+                shape = RoundedCornerShape(5.dp),
+            ) {
+                Row(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .height(70.dp), // Ensure both cards have the same height
-                    shape = RoundedCornerShape(5.dp),
+                        .fillMaxSize()
+                        .padding(10.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Row(
+                    Column(
                         modifier = Modifier
-                            .wrapContentWidth()
-                            .padding(10.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                            .weight(1f)
                     ) {
-                        Column(
-                            modifier = Modifier
-                        ) {
-                            Text(text = "Availability", fontWeight = FontWeight.Bold)
-                        }
-                        SpacerWidth(10.dp)
-                        Box(
-                            modifier = Modifier
-                                .size(36.dp)
-                                .background(Color.Red, shape = CircleShape)
-                                .padding(5.dp),
-                            contentAlignment = Alignment.BottomEnd
-                        ) {
-                            Icon(
-                                modifier = Modifier.size(36.dp)
-                                    .scale(1f, 1.9f),
-                                painter = painterResource(id = R.drawable.btn_2),
-                                contentDescription = "Store",
-                                tint = Color.White
+                        Text(
+                            text = "Availability",
+                            fontWeight = FontWeight.Bold
+                        )
+                    }
+                    SpacerWidth(10.dp)
+                    Box(
+                        modifier = Modifier
+                            .size(56.dp)
+                            .offset(
+                                x = 19.dp,
+                                y = 16.dp
                             )
-                        }
+                            .background(Color.Red, shape = CircleShape),
+                        contentAlignment = Alignment.BottomEnd
+                    ) {
+                        Icon(
+                            painter = painterResource(id = R.drawable.btn_2),
+                            contentDescription = "Store",
+                            tint = Color.White,
+                            modifier = Modifier
+                                .size(24.dp)
+                                .offset(x = -18.dp,y = -10.dp)
+                        )
                     }
                 }
             }
         }
-        }
-
     }
-
+}
 
 @Preview(showBackground = true)
 @Composable
