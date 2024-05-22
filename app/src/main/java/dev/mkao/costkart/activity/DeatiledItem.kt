@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.asComposePath
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -92,7 +93,7 @@ fun TopSection() {
                 ) {
                     Icon(
                         Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
+                        contentDescription = stringResource(R.string.back),
                         tint = Color.Black
                     )
                 }
@@ -261,7 +262,7 @@ fun AvailabilityCard() {
 fun CompositionSection() {
     Column {
         Text(
-            text = "Product Information",
+            text = stringResource(R.string.product_information),
             style = TextStyle(
                 fontSize = 24.sp,
                 fontWeight = FontWeight.ExtraBold,
@@ -310,7 +311,7 @@ fun KeyFeaturesSection() {
 fun MoreInfoSection() {
     Column {
         Text(
-            text = "Similar Products",
+            text = stringResource(R.string.similar_products),
             style = TextStyle(
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
@@ -444,7 +445,7 @@ fun PriceAndAddToCartSection() {
             ) {
                 Icon(
                     Icons.Default.Add,
-                    contentDescription = "Add to Cart",
+                    contentDescription = stringResource(R.string.add_to_cart),
                     tint = Color.Black
                 )
                 Spacer(modifier = Modifier.width(5.dp))

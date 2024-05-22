@@ -3,17 +3,7 @@ package dev.mkao.costkart.activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,24 +11,13 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Divider
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.Text
-import androidx.compose.material3.VerticalDivider
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -60,40 +39,67 @@ fun MyCart(
             .fillMaxSize()
             .padding(10.dp)
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 50.dp, start = 10.dp, end = 10.dp)
-        ) {
-            Text(
-                fontSize = 28.sp,
-                fontWeight = FontWeight.Bold,
-                text = "My Cart"
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                fontSize = 16.sp,
-                textAlign = TextAlign.End,
-                fontWeight = FontWeight.Normal,
-                text = "Clear",
-                modifier = Modifier.clickable { onClearCart() }
+        CartHeader(onClearCart)
+        Spacer(modifier = Modifier.height(10.dp))
+        CartItemsList(cartItems, onItemRemove, onItemCountChange)
+        Spacer(modifier = Modifier.height(10.dp))
+        CartSummary()
+        Spacer(modifier = Modifier.height(20.dp))
+        CheckoutSection(onCheckout)
+    }
+}
+
+@Composable
+fun CartHeader(onClearCart: () -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 50.dp, start = 10.dp, end = 10.dp)
+    ) {
+        Text(
+            fontSize = 28.sp,
+            fontWeight = FontWeight.Bold,
+            text = stringResource(R.string.my_cart)
+        )
+        Spacer(modifier = Modifier.weight(1f))
+        Text(
+            fontSize = 16.sp,
+            textAlign = TextAlign.End,
+            fontWeight = FontWeight.Normal,
+            text = stringResource(R.string.clear),
+            modifier = Modifier.clickable { onClearCart() }
+        )
+    }
+}
+
+@Composable
+fun CartItemsList(
+    cartItems: List<CartItem>,
+    onItemRemove: (CartItem) -> Unit,
+    onItemCountChange: (CartItem, Int) -> Unit
+) {
+    LazyColumn(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 10.dp)
+    ) {
+        items(cartItems) { item ->
+            MyCartItem(
+                cartItem = item,
+                onItemRemove = onItemRemove,
+                onItemCountChange = onItemCountChange
             )
         }
-        Spacer(modifier = Modifier.height(10.dp))
-        LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 10.dp)
-        ) {
-            items(cartItems) { item ->
-                MyCartItem(
-                    cartItem = item,
-                    onItemRemove = onItemRemove,
-                    onItemCountChange = onItemCountChange
-                )
-            }
-        }
-        Spacer(modifier = Modifier.height(10.dp))
+    }
+}
+
+@Composable
+fun CartSummary() {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(12.dp)
+    ) {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -102,7 +108,7 @@ fun MyCart(
             Text(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                text = "Your Order"
+                text = stringResource(R.string.your_order)
             )
         }
         Row(
@@ -113,7 +119,7 @@ fun MyCart(
             Text(
                 fontWeight = FontWeight.Normal,
                 fontSize = 18.sp,
-                text = "Products"
+                text = stringResource(R.string.products)
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
@@ -130,7 +136,7 @@ fun MyCart(
             Text(
                 fontWeight = FontWeight.Normal,
                 fontSize = 18.sp,
-                text = "Card Discount"
+                text = stringResource(R.string.card_discount)
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
@@ -148,7 +154,7 @@ fun MyCart(
             Text(
                 fontWeight = FontWeight.Bold,
                 fontSize = 24.sp,
-                text = "Total Cost"
+                text = stringResource(R.string.total_cost)
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
@@ -159,31 +165,35 @@ fun MyCart(
                 text = "$ 450"
             )
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Column(
+    }
+}
+
+@Composable
+fun CheckoutSection(onCheckout: () -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(horizontal = 12.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = 12.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .height(50.dp),
+            onClick = onCheckout,
+            colors = ButtonDefaults.buttonColors(Color(0xFF008080))
         ) {
-            Button(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp),
-                onClick = onCheckout,
-                colors = ButtonDefaults.buttonColors(Color(0xFF008080))
-            ) {
-                Text(
-                    fontSize = 16.sp,
-                    text = "Go to checkout")
-            }
-            Spacer(modifier = Modifier.height(20.dp))
             Text(
                 fontSize = 16.sp,
-                text = "Available delivery methods and times can be selected when placing an order",
-                textAlign = TextAlign.Center
+                text = stringResource(R.string.go_to_checkout)
             )
         }
+        Spacer(modifier = Modifier.height(20.dp))
+        Text(
+            fontSize = 16.sp,
+            text = "Available delivery methods and times can be selected when placing an order",
+            textAlign = TextAlign.Center
+        )
     }
 }
 
@@ -232,7 +242,7 @@ fun MyCartItem(
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Close,
-                                contentDescription = "Close"
+                                contentDescription = "Remove item"
                             )
                         }
                     }
@@ -255,7 +265,7 @@ fun MyCartItem(
                             IconButton(onClick = { if (count > 1) count--; onItemCountChange(cartItem, count) }) {
                                 Icon(
                                     imageVector = Icons.Default.ArrowDropDown,
-                                    contentDescription = "Minus"
+                                    contentDescription = "Decrease quantity"
                                 )
                             }
                             Divider(
@@ -279,7 +289,7 @@ fun MyCartItem(
                             IconButton(onClick = { count++; onItemCountChange(cartItem, count) }) {
                                 Icon(
                                     imageVector = Icons.Default.Add,
-                                    contentDescription = "Plus"
+                                    contentDescription = "Increase quantity"
                                 )
                             }
                         }

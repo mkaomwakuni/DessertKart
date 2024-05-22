@@ -20,6 +20,17 @@
     <string name="SplashFooter">Already have an account?</string>
     <string name="SplashAddon">Sign In</string>
     <string name="CategoriesHeadline">Categories</string>
+    <string name="products">Products</string>
+    <string name="card_discount">Card Discount</string>
+    <string name="total_cost">Total Cost</string>
+    <string name="go_to_checkout">Go to checkout</string>
+    <string name="your_order">Your Order</string>
+    <string name="my_cart">My Cart</string>
+    <string name="clear">Clear</string>
+    <string name="back">Back</string>
+    <string name="product_information">Product Information</string>
+    <string name="similar_products">Similar Products</string>
+    <string name="add_to_cart">Add to Cart</string>
 
 
 </resources>
