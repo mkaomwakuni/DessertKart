@@ -338,13 +338,13 @@ fun MoreInfoCard() {
     Card(
         modifier = Modifier
             .width(300.dp)
-            .height(100.dp),
+            .height(110.dp),
         colors = CardDefaults.cardColors(Color.White),
         shape = RoundedCornerShape(8.dp),
         elevation = CardDefaults.cardElevation(3.dp)
     ) {
         Row(
-            modifier = Modifier.padding(15.dp),
+            modifier = Modifier.padding(10.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {

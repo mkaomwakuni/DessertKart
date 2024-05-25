@@ -181,7 +181,7 @@ fun CheckoutSection(onCheckout: () -> Unit) {
                 .fillMaxWidth()
                 .height(50.dp),
             onClick = onCheckout,
-            colors = ButtonDefaults.buttonColors(Color(0xFF008080))
+            colors = ButtonDefaults.buttonColors(Color(0xFFFFDAB9))
         ) {
             Text(
                 fontSize = 16.sp,
